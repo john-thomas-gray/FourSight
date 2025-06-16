@@ -37,7 +37,13 @@ const Board = ({className} : {className?: string}) => {
             const type = isCorner ? 'corner' : isEdge ? 'slot' : 'space';
 
             return (
-              <Space key={`${row}-${col}`} type={type} orientation={orientation} />
+              <Space
+                key={`${row}-${col}`}
+                type={type}
+                orientation={orientation}
+                row={row}
+                col={col}
+              />
             );
           })}
         </View>

@@ -1,39 +1,40 @@
-import corner-arrow-NE.png from '@/assets/images/corner-arrow-NE.png';
-import corner-arrow-NW.png from '@/assets/images/corner-arrow-NW.png';
-import corner-arrow-SE.png from '@/assets/images/corner-arrow-SE.png';
-import corner-arrow-SW.png from '@/assets/images/corner-arrow-SW.png';
-import slot-arrow-east-black from '@/assets/images/slot-arrow-east-black.png';
-import slot-arrow-east-white from '@/assets/images/slot-arrow-east-white.png';
-import slot-arrow-north-black from '@/assets/images/slot-arrow-north-black.png';
-import slot-arrow-north-white from '@/assets/images/slot-arrow-north-white.png';
-import slot-arrow-south-black from '@/assets/images/slot-arrow-south-black.png';
-import slot-arrow-south-white from '@/assets/images/slot-arrow-south-white.png';
-import slot-arrow-west-black from '@/assets/images/slot-arrow-west-black.png';
-import slot-arrow-west-white from '@/assets/images/slot-arrow-west-white.png';
+import cornerArrowNE from '../assets/images/corner-arrow-NE.png';
+import cornerArrowNW from '../assets/images/corner-arrow-NW.png';
+import cornerArrowSE from '../assets/images/corner-arrow-SE.png';
+import cornerArrowSW from '../assets/images/corner-arrow-SW.png';
+
+import slotArrowEastBlack from '../assets/images/slot-arrow-east-black.png';
+import slotArrowEastWhite from '../assets/images/slot-arrow-east-white.png';
+import slotArrowNorthBlack from '../assets/images/slot-arrow-north-black.png';
+import slotArrowNorthWhite from '../assets/images/slot-arrow-north-white.png';
+import slotArrowSouthBlack from '../assets/images/slot-arrow-south-black.png';
+import slotArrowSouthWhite from '../assets/images/slot-arrow-south-white.png';
+import slotArrowWestBlack from '../assets/images/slot-arrow-west-black.png';
+import slotArrowWestWhite from '../assets/images/slot-arrow-west-white.png';
 
 export const icons = {
   corner: {
-    NE: corner-arrow-NE.png,
-    NW: corner-arrow-NW.png,
-    SE: corner-arrow-SE.png,
-    SW: corner-arrow-SW.png,
+    NE: cornerArrowNE,
+    NW: cornerArrowNW,
+    SE: cornerArrowSE,
+    SW: cornerArrowSW,
   },
   slot: {
     east: {
-      black: slot-arrow-east-black,
-      white: slot-arrow-east-white,
+      black: slotArrowEastBlack,
+      white: slotArrowEastWhite,
     },
     north: {
-      black: slot-arrow-north-black,
-      white: slot-arrow-north-white,
+      black: slotArrowNorthBlack,
+      white: slotArrowNorthWhite,
     },
     south: {
-      black: slot-arrow-south-black,
-      white: slot-arrow-south-white,
+      black: slotArrowSouthBlack,
+      white: slotArrowSouthWhite,
     },
     west: {
-      black: slot-arrow-west-black,
-      white: slot-arrow-west-white,
+      black: slotArrowWestBlack,
+      white: slotArrowWestWhite,
     },
   },
-}
+};

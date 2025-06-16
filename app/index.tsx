@@ -17,10 +17,10 @@ export default function Index() {
     <SafeAreaView className="flex-1 border-2 border-red-50 items-center justify-evenly">
       <Text className="text-black font-bold text-8xl">FourSight</Text>
       <View className="flex-col items-center">
-        <Link href="/twoPlayer" className="mb-1">2-Player</Link>
-        <Link href="/fourPlayer" className="mb-1">4-Player</Link>
-        <Link href="/settings" className="mb-1">Settings</Link>
-        <Link href="/howToPlay" className="mb-1">How to Play</Link>
+        <Link href="/twoPlayer" className="text-lg">Two Player</Link>
+        <Link href="/fourPlayer" className="text-lg">Four Player</Link>
+        <Link href="/settings" className="text-lg">Settings</Link>
+        <Link href="/howToPlay" className="text-lg">How to Play</Link>
       </View>
     </SafeAreaView>
   );

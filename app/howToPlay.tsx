@@ -1,56 +1,73 @@
-import React, { useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import BackButton from '@/components/BackButton';
+import React, { useState } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HowToPlay = () => {
-  const [twoPlayerSelected, setTwoPlayerSelected] = useState(true)
+  const [twoPlayerSelected, setTwoPlayerSelected] = useState(true);
 
   const handleSelectTwoPlayer = () => {
-    if (twoPlayerSelected) return null;
-    setTwoPlayerSelected(true);
+    if (!twoPlayerSelected) setTwoPlayerSelected(true);
   };
 
   const handleSelectFourPlayer = () => {
-    if (!twoPlayerSelected) return null;
-    console.log("four")
-    setTwoPlayerSelected(false);
+    if (twoPlayerSelected) setTwoPlayerSelected(false);
   };
 
-
   return (
-    <SafeAreaView className="flex-1 border-2 border-red-50 items-center">
-      <Text className="text-black font-bold text-6xl">How to Play</Text>
-      <View className="flex-col">
-        <View className="flex-row justify-evenly">
-          <Pressable className="flex" onPress={() => {handleSelectTwoPlayer()}}>
-            <Text className={`${twoPlayerSelected ? "font-bold" : "font-regular"} text-3xl text-black`}>Two Player</Text>
-          </Pressable>
-          <Pressable className="flex" onPress={() => {handleSelectFourPlayer()}}>
-            <Text className={`${!twoPlayerSelected ? "font-bold" : "font-regular"} text-3xl text-black`}>Four Player</Text>
-          </Pressable>
+    <SafeAreaView className="flex-1 bg-white">
+      <ScrollView contentContainerStyle={{ padding: 24 }}>
 
-        </View>
-        {
-        twoPlayerSelected ?
-        <Text className="leading-10">
-          Each player takes a turn dropping a piece into the board.{"\n"}
-          Pieces can be dropped from any side of the board and fall to the board&apos;s opposite edge or another piece.{"\n"}
-          The first player to place four pieces in a row (horizontally, vertically or diagonally) wins the game.{"\n"}
-          But here&apos;s the twist...{"\n"}
-          A player may forfeit placing a piece to shift gravity and pull all pieces to one side of the board!
-        </Text> :
-        <Text className="leading-10">
-          Players are on teams of two. Your partner is the person seated across the board from you.{"\n"}
-          You may only drop pieces from your side of the board. They fall to the board&apos;s opposite edge or another piece.{"\n"}
-          The first team to place four pieces in a row (horizontally, vertically or diagonally) wins the game.{"\n"}
-          But here&apos;s the twist...{"\n"}
-          A player may forfeit placing a piece to either pull all pieces to their side of the board or rotate the board 90°!
+        <BackButton/>
 
+        <Text className="text-black font-bold text-5xl text-center mb-8">
+          How to Play
         </Text>
-        }
-      </View>
-    </SafeAreaView>
-  )
-}
 
-export default HowToPlay
+        <View className="flex-row justify-evenly mb-8">
+          <Pressable onPress={handleSelectTwoPlayer}>
+            <Text
+              className={`text-2xl font-bold ${
+                twoPlayerSelected ? 'text-black' : 'text-gray-500'
+              }`}
+            >
+              Two Player
+            </Text>
+          </Pressable>
+          <Pressable onPress={handleSelectFourPlayer}>
+            <Text
+              className={`text-2xl font-bold ${
+                !twoPlayerSelected ? 'text-black' : 'text-gray-500'
+              }`}
+            >
+              Four Player
+            </Text>
+          </Pressable>
+        </View>
+
+        <View className="w-full">
+          {twoPlayerSelected ? (
+            <Text className="leading-8 text-lg text-black">
+              Each player takes a turn dropping a piece into the board.{"\n"}
+              Pieces are dropped from any side of the board and fall to the opposite edge or to another piece.{"\n"}
+              The first player to place four pieces in a row (horizontally, vertically, or diagonally) wins the game.{"\n\n"}
+              <Text className="font-bold">But here&apos;s the twist...</Text>{"\n"}
+              A player may forfeit placing a piece to shift gravity and pull all pieces to one side of the board!
+            </Text>
+          ) : (
+            <Text className="leading-8 text-lg text-black">
+              Players are on teams of two. Your partner is the person seated across the board from you.{"\n"}
+              A player may only drop pieces from their side of the board. Pieces fall to the opposite edge or to another piece.{"\n"}
+              The first team to place four pieces in a row (horizontally, vertically, or diagonally) wins the game.{"\n\n"}
+              <Text className="font-bold">But here&apos;s the twist...</Text>{"\n"}
+              A player may forfeit placing a piece to either pull all pieces to{" "}
+              <Text className="italic">their</Text> side of the board or rotate the board 90°!
+            </Text>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default HowToPlay;

@@ -11,10 +11,8 @@ const Piece = ({ team }: { team: string }) => {
 
       onPanResponderGrant: () => {
         setIsDragging(true);
-        pan.setOffset({
-          x: pan.x._value,
-          y: pan.y._value,
-        });
+        // Correct way to handle offset without accessing _value
+        pan.extractOffset();
         pan.setValue({ x: 0, y: 0 });
       },
 

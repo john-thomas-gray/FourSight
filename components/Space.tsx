@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
 import { useGame } from '../context/GameContext';
+import Piece from './Piece';
 
 export type SpaceProps = {
   row: number;
@@ -15,6 +16,8 @@ const Space: React.FC<SpaceProps> = ({ row, col, backgroundColor, children }) =>
   const isEven = (row + col) % 2 === 0;
   const bg = backgroundColor ?? (isEven ? '#d1fae5' : '#ffffff');
 
+  const teamAtSpace = boardState[`${row}-${col}`];
+
   const style: ViewStyle = {
     flex: 1,
     borderWidth: 1,
@@ -26,6 +29,7 @@ const Space: React.FC<SpaceProps> = ({ row, col, backgroundColor, children }) =>
 
   return (
     <View style={style}>
+      {teamAtSpace && <Piece team={teamAtSpace} />}
       {children}
     </View>
   );

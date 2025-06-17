@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { icons } from '../../constants/images';
+import { icons } from '../constants/images';
 import Space from './Space';
 
 type SlotProps = {
@@ -24,15 +24,18 @@ const Slot: React.FC<SlotProps> = ({
   };
 
   const dir = dirMap[orientation];
-  const src = icons.slot[dir][team];
+  console.log('icon source:', icons.slot[dir][team]);
 
   return (
+    <>
+
     <Space row={row} col={col} backgroundColor="silver">
       <Image
-        source={src}
+        source={icons.slot[dir][team]}
         style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
       />
     </Space>
+    </>
   );
 };
 

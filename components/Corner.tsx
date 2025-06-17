@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { icons } from '../../constants/images';
+import { icons } from '../constants/images';
 import Space from './Space';
 
 type CornerProps = {
@@ -10,12 +10,11 @@ type CornerProps = {
 };
 
 const Corner: React.FC<CornerProps> = ({ orientation, row = 0, col = 0 }) => {
-  const src = icons.corner[orientation];
 
   return (
-    <Space row={row} col={col} backgroundColor="gold">
+    <Space row={row} col={col} backgroundColor="pink">
       <Image
-        source={src}
+        source={icons.corner[orientation]}
         style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
       />
     </Space>

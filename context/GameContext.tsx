@@ -1,36 +1,62 @@
-// context/GameContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 
-type Team = 'white' | 'black' | null;
-
-type BoardState = (Team)[][];
-
-const BOARD_SIZE = 9;
-
-const createEmptyBoard = (): BoardState =>
-  Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(null));
+type BoardState = { [key: string]: string }; // e.g., "3-4": "white"
+type PiecePileState = { [key: string]: string[] };
 
 const GameContext = createContext<{
-  board: BoardState;
-  placePiece: (row: number, col: number, team: Team) => void;
+  boardState: BoardState;
+  piecePileState: PiecePileState;
+  placePiece: (row: number, col: number, team: string) => void;
+  placeInPile: (pileId: string, team: string) => void;
+  removeFromPile: (pileId: string, team: string) => void;
 }>({
-  board: createEmptyBoard(),
+  boardState: {},
+  piecePileState: {},
   placePiece: () => {},
+  placeInPile: () => {},
+  removeFromPile: () => {},
 });
 
-export const GameProvider = ({ children }: { children: React.ReactNode }) => {
-  const [board, setBoard] = useState<BoardState>(createEmptyBoard());
+export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [boardState, setBoardState] = useState<BoardState>({});
+  const [piecePileState, setPiecePileState] = useState<PiecePileState>({});
 
-  const placePiece = (row: number, col: number, team: Team) => {
-    setBoard(prev =>
-      prev.map((r, i) =>
-        r.map((cell, j) => (i === row && j === col ? team : cell))
-      )
-    );
+
+  // Place piece on the board (row, col)
+  const placePiece = (row: number, col: number, team: string) => {
+    setBoardState((prev) => ({ ...prev, [`${row}-${col}`]: team }));
+  };
+
+  // Place a piece into a pile (e.g., "pile-0")
+  const placeInPile = (pileId: string, team: string) => {
+    setPiecePileState((prev) => {
+      const pile = prev[pileId] || [];
+      return { ...prev, [pileId]: [...pile, team] };
+    });
+  };
+
+  // Remove a piece from a pile (by team, removes one occurrence)
+  const removeFromPile = (pileId: string, team: string) => {
+    setPiecePileState((prev) => {
+      const pile = prev[pileId] || [];
+      const index = pile.indexOf(team);
+      if (index === -1) return prev;
+      const newPile = [...pile];
+      newPile.splice(index, 1);
+      return { ...prev, [pileId]: newPile };
+    });
   };
 
   return (
-    <GameContext.Provider value={{ board, placePiece }}>
+    <GameContext.Provider
+      value={{
+        boardState,
+        piecePileState,
+        placePiece,
+        placeInPile,
+        removeFromPile,
+      }}
+    >
       {children}
     </GameContext.Provider>
   );

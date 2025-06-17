@@ -1,4 +1,4 @@
-import Board from '@/components/Board/Board';
+import Board from '@/components/Board';
 import PiecePile from '@/components/PiecePile';
 import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
@@ -23,7 +23,7 @@ const TwoPlayer = () => {
           justifyContent: 'center',  // center all horizontally
           alignItems: 'center',
           paddingHorizontal: 16,
-          paddingTop: 20,
+          paddingTop: 30,
           gap: 20, // add some spacing between children (RN 0.71+)
         }}
       >
@@ -34,7 +34,7 @@ const TwoPlayer = () => {
             aspectRatio: 1,
           }}
         >
-          <Board />
+          <Board className="h-full"/>
         </View>
         <PiecePile team="black" />
       </View>

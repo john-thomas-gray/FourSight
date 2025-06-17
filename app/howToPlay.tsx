@@ -57,7 +57,8 @@ const HowToPlay = () => {
           ) : (
             <Text className="leading-8 text-lg text-black">
               Players are on teams of two. Your partner is the person seated across the board from you.{"\n"}
-              A player may only drop pieces from their side of the board. Pieces fall to the opposite edge or to another piece.{"\n"}
+              Each turn, a player drops a piece from their side of the board. {"\n"}
+              Pieces fall to the opposite edge or to another piece.{"\n"}
               The first team to place four pieces in a row (horizontally, vertically, or diagonally) wins the game.{"\n\n"}
               <Text className="font-bold">But here&apos;s the twist...</Text>{"\n"}
               A player may forfeit placing a piece to either pull all pieces to{" "}

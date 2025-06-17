@@ -1,79 +1,53 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import icons from '@constants/images';
+// Space.tsx
+import React from 'react'
+import { LayoutChangeEvent, Pressable, View, ViewStyle } from 'react-native'
 
-type SpaceProps = {
-  type?: 'space' | 'slot' | 'corner';
-  orientation?: 'N' | 'S' | 'E' | 'W';
-};
-
-import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { icons } from '@/constants/icons'; // adjust this path to match your project
-
-type SpaceProps = {
-  type?: 'space' | 'slot' | 'corner';
-  orientation?: 'N' | 'S' | 'E' | 'W' | 'NE' | 'NW' | 'SE' | 'SW';
-  row?: number;
-  col?: number;
-};
+export type SpaceProps = {
+  row?: number
+  col?: number
+  backgroundColor?: string
+  children?: React.ReactNode
+  onPress?: () => void
+  onLayout?: (event: LayoutChangeEvent) => void   // ← add this
+}
 
 const Space: React.FC<SpaceProps> = ({
-    type = 'space',
-    orientation = 'N',
-    row = 0,
-    col = 0
-  }) => {
-    const isEven = (row + col) % 2 === 0;
+  row = 0,
+  col = 0,
+  backgroundColor,
+  children,
+  onPress,
+  onLayout,
+}) => {
+  const isEven = (row + col) % 2 === 0
+  const bg = backgroundColor ?? (isEven ? '#d1fae5' : '#ffffff')
 
-    const renderContent = () => {
-      if (type === 'corner') {
-        const src = icons.corner[orientation as 'NE' | 'NW' | 'SE' | 'SW'];
-        return <Image source={src} style={{ width: '80%', height: '80%', resizeMode: 'contain' }} />;
-      }
+  const style: ViewStyle = {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: bg,
+  }
 
-      if (type === 'slot') {
-        const team = 'black'; // or pass this as a prop if it changes
-        const dir = orientation.toLowerCase() as 'north' | 'south' | 'east' | 'west';
-        const src = icons.slot[dir][team];
-        return <Image source={src} style={{ width: '80%', height: '80%', resizeMode: 'contain' }} />;
-      }
-
-      // space checkerboard
-      return (
-        <View
-          style={{
-            backgroundColor: isEven ? '#d1fae5' : '#ffffff', // green-100 or white
-            width: '100%',
-            height: '100%',
-          }}
-        />
-      );
-    };
-
+  if (onPress) {
     return (
-      <View
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          borderColor: '#ccc',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+      <Pressable
+        style={style}
+        onPress={onPress}
+        onLayout={onLayout}
       >
-        {renderContent()}
-      </View>
-    );
-  };
-
-export default Space;
-
+        {children}
+      </Pressable>
+    )
+  }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderWidth: 1 }}>
-      {renderContent()}
+    <View style={style} onLayout={onLayout}>
+      {children}
     </View>
-  );
-};
+  )
+}
 
-export default Space;
+export default Space
